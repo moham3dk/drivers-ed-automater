@@ -14,18 +14,21 @@ class BotCommands(commands.Cog):
     @commands.command()
     async def shutdown(self, ctx):
         await ctx.send("```🚫 Shutting down...```")
+        await self.bot.driver.stop()
         await self.bot.close()
 
     @commands.command()
-    async def run_driver(self, ctx):
+    async def run(self, ctx):
         try:
             await self.bot.driver.run()
+            await ctx.send("```✅ Bot is running.```")
         except Exception as e:
             await ctx.send(f"```{str(e)}```")
 
     @commands.command()
-    async def stop_driver(self, ctx):
+    async def stop(self, ctx):
         await self.bot.driver.stop()
+        await ctx.send("```🛑 Bot stopped.```")
 
 
 async def setup(bot):

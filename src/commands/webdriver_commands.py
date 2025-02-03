@@ -9,7 +9,7 @@ class WebDriverCommands(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def get_dom(self, ctx):
+    async def get_dom(self, ctx): # lowkey useless
         await ctx.send("```⚙️ Getting DOM...```")
 
         dom = await self.bot.driver.get_dom()
@@ -24,7 +24,7 @@ class WebDriverCommands(commands.Cog):
         await ctx.send("```✅ DOM fetched successfully.```")
 
     @commands.command()
-    async def click_element(self, ctx, by: str, value: str):
+    async def click_element(self, ctx, by: str, value: str): # probably will never be used but whatever
         await ctx.send(f"```⚙️ Clicking element: {value}...```")
 
         by_mapping = {
@@ -50,7 +50,7 @@ class WebDriverCommands(commands.Cog):
             await ctx.send("```❌ Invalid 'by' value.```")
 
     @commands.command()
-    async def screenshot(self, ctx):
+    async def screenshot(self, ctx): # very usful
         try:
             await ctx.send("```⚙️ Taking a screenshot...```")
 
