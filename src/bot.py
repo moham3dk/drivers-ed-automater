@@ -8,15 +8,10 @@ from utils.logger import Logger
 from config.config import Config
 
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix="!", intents=intents)
-
-bot.driver = WebDriverService(bot)
-bot.logger = Logger()
-
 
 class TooCoolTrafficSchoolBot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix="!", intents=intents)
+        super().__init__(command_prefix="!", intents=intents, help_command=None)
 
         self.driver = WebDriverService(self)
         self.logger = Logger()
@@ -37,7 +32,6 @@ class TooCoolTrafficSchoolBot(commands.Bot):
     async def on_ready(self):
         self.logger.success(f"Logged in as {self.user.name}")
 
-        # Find the first available text channel
         for guild in self.guilds:
             for channel in guild.text_channels:
                 self.log_channel = channel
@@ -55,7 +49,6 @@ class TooCoolTrafficSchoolBot(commands.Bot):
             sys.exit(1)
 
         await self.driver.run()
-
 
 bot = TooCoolTrafficSchoolBot()
 bot.run(Config.bot_token)

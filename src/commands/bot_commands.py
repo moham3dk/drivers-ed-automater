@@ -1,6 +1,5 @@
-import discord
 from discord.ext import commands
-import os
+import sys
 
 
 class BotCommands(commands.Cog):
@@ -13,22 +12,20 @@ class BotCommands(commands.Cog):
 
     @commands.command()
     async def shutdown(self, ctx):
-        await ctx.send("```🚫 Shutting down...```")
+        self.bot.logger.info("Shutting down...")    
         await self.bot.driver.stop()
+        await ctx.send("```🚫 Shutting down...```")
         await self.bot.close()
+        self.bot.logger.success("Shutdown successful.")
+        sys.exit(0)
 
     @commands.command()
     async def run(self, ctx):
-        try:
-            await self.bot.driver.run()
-            await ctx.send("```✅ Bot is running.```")
-        except Exception as e:
-            await ctx.send(f"```{str(e)}```")
+        await self.bot.driver.run()
 
     @commands.command()
     async def stop(self, ctx):
         await self.bot.driver.stop()
-        await ctx.send("```🛑 Bot stopped.```")
 
 
 async def setup(bot):
