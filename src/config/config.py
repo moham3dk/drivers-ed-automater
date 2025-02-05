@@ -9,7 +9,7 @@ class Config:
     username = os.getenv("USERNAME")
     password = os.getenv("PASSWORD")
     bot_token = os.getenv("BOT_TOKEN")
-    course_url = "https://school.toocooltrafficschool.com/student/course/31113911"
+    course_url = os.getenv("COURSE_URL")
 
     if not username or not password or not bot_token:
         raise ValueError("Please provide all the necessary environment variables.")
