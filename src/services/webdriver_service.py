@@ -51,6 +51,17 @@ class WebDriverService:
         except Exception as e:
             self.bot.logger.error(f"Failed to take screenshot: {e}")
 
+    async def get_dom(self):
+        """Retrieves the current DOM."""
+        self.bot.logger.debug("Retrieving DOM...")
+        try:
+            dom = self.driver.page_source
+            self.bot.logger.debug("DOM retrieved.")
+            return dom
+        except Exception as e:
+            self.bot.logger.error(f"Failed to retrieve DOM: {e}")
+            return None
+
     #################################
     # BASE FUNCTIONS FOR AUTOMATION #
     #################################
@@ -336,7 +347,9 @@ class WebDriverService:
             self.bot.logger.info("Starting the WebDriver...")
             self.running = True
             await self.create_driver()
-            await self.bot.log_channel.send("```✅ WebDriver started. Use !help for a list of commands and !stop to stop the WebDriver.```")
+            await self.bot.log_channel.send(
+                "```✅ WebDriver started. Use !help for a list of commands and !stop to stop the WebDriver.```"
+            )
             await self.login(Config.username, Config.password)
             await self.start_course()
 

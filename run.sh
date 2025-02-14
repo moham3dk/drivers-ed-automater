@@ -1,26 +1,21 @@
 #!/bin/bash
 
-# Function to prompt user for input
 prompt_input() {
     read -p "$1: " input
     echo "$input"
 }
 
-# Check if Python is installed
 if ! command -v python3 &> /dev/null; then
     echo "Python3 is not installed. Please install Python3 and try again."
     exit 1
 fi
 
-# Create virtual environment if it doesn't exist
 if [ ! -d ".venv" ]; then
     python3 -m venv .venv
     echo "Virtual environment created."
     
-    # Activate virtual environment
     source .venv/bin/activate
-
-    # Install requirements
+    
     if [ -f "requirements.txt" ]; then
         pip install -r requirements.txt
         echo "Requirements installed."
@@ -34,7 +29,6 @@ else
     source .venv/bin/activate
 fi
 
-# Setup environment variables
 ENV_FILE=".env"
 
 if [ -f "$ENV_FILE" ]; then
@@ -59,10 +53,8 @@ if [ ! -f "$ENV_FILE" ] || [ "$overwrite" == "y" ]; then
     echo ".env file created with provided details."
 fi
 
-#clear
 clear
 
-# Run the bot
 python3 src/bot.py
 
 deactivate
