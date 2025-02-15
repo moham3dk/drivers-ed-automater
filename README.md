@@ -4,11 +4,6 @@ A script to automate **Too Cool Traffic School's Drivers Ed** course. Features D
 
 ## Usage
 
-1. **Run the script**:
-
-   - On **Windows**: Execute the `.bat` file.
-   - On **macOS/Linux**: Run the `.sh` script.
+1. Run the script
 
 2. Follow the on-screen instructions.
-
-**Cross-platform** and easy to use!
